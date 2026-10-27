@@ -349,12 +349,12 @@ const metaLessons=[
 `<h3>15. Політики, безпека й готовність до запуску</h3><p>Політики не є фінальним адміністративним кроком. Вони впливають на те, як можна сформулювати таргетинг, креатив і збір даних. Meta Blueprint включає відповідність Advertising Standards і захист акаунта до базових практик. Особливо обережно перевіряй правила спеціальних категорій та локальні вимоги для нерухомості перед будь-яким запуском.</p><p>Pre-flight checklist має містити: коректні права доступу, звʼязані бізнес-активи, валідний домен та URL, політику приватності, робочу форму, тестову подію, UTM, правила обробки ліда, дані платіжного відповідального і збережений скрін/опис конфігурації. Це знижує ризик, що кампанія доставляє кліки у зламану воронку.</p><h3>Чек-ліст готовності (відмічай у localStorage)</h3><p>Пройди перед кожним запуском. Прогрес зберігається локально в браузері.</p><div class="checklist">
 <label><input type="checkbox" data-id="pf1"> Домен і посадкова доступні, мобільна версія перевірена</label>
 <label><input type="checkbox" data-id="pf2"> Meta Pixel / Google Tag встановлені, події тестуються</label>
-<label><input type="checkbox" data-id="pf3"> CRM приймає ліди з UTM-розміткою</label>
+<label><input type="checkbox" data-id="pf3"> Земля: CRM приймає ліди з UTM. Квитки: джерело зберігається з оплаченим замовленням</label>
 <label><input type="checkbox" data-id="pf4"> UTM-стандарт записаний і застосовується скрізь</label>
 <label><input type="checkbox" data-id="pf5"> Конверсії налаштовані: primary vs secondary визначені</label>
 <label><input type="checkbox" data-id="pf6"> Офер і посадкова відповідають (message match)</label>
-<label><input type="checkbox" data-id="pf7"> Менеджер знає, як приймати лід і що казати</label>
-<label><input type="checkbox" data-id="pf8"> Час першої відповіді ≤ 30 хв у робочий час</label>
+<label><input type="checkbox" data-id="pf7"> Земля: менеджер знає порядок роботи з лідом. Квитки: оплата й автоматична доставка квитка перевірені</label>
+<label><input type="checkbox" data-id="pf8"> Земля: строк відповіді погоджений із командою. Квитки: перевірені успішна й невдала оплати та підтримка</label>
 <label><input type="checkbox" data-id="pf9"> Креативи відповідають політикам Meta</label>
 <label><input type="checkbox" data-id="pf10"> Google Ads: політика нерухомості/івентів перевірена</label>
 <label><input type="checkbox" data-id="pf11"> Бюджет визначений, дата зупинки записана</label>
@@ -392,8 +392,8 @@ const deep={
 39:`<h3>39. Фінальний acquisition plan</h3><p>План обʼєднує все: сегмент, проблему, офер, юніт-економіку, структуру Meta і Google, трекінг, CRM, креативні гіпотези, ризики, правила review. Це документ, який можна прочитати в пʼятницю ввечері і в понеділок зранку почати роботу.</p><p>Не запускай план автоматично. Це план підготовки до контрольованого тесту. Бюджет, дата запуску і власник результату — окреме рішення.</p><h3>Помилка</h3><p>Змішувати план із дозволом витрачати гроші.</p>`,
 40:`<h3>40. Операційна ретроспектива</h3><p>Ти завершив курс. Перевір себе як оператора, а не як учня термінів: чи вмієш ти пояснити, що тестуєш, навіщо, якими даними перевіриш і що зробиш при кожному результаті? Якщо так — ти готовий до контрольованого запуску. Якщо ні — повернись до конкретного модуля.</p><p>Вибери один проєкт на наступні 30 днів. Сформуй перший тижневий backlog і правила review. Не запускай рекламу, поки не маєш CRM, оферу, юніт-економіки, трекінгу і контрольних меж.</p><h3>Фінальна перевірка готовності</h3><p>Пройди чек-ліст нижче. Якщо хоча б один пункт не закритий — повернись до відповідного модуля.</p><div class="checklist">
 <label><input type="checkbox" data-id="rd1"> Проєкт визначений: сегмент, офер, посадкова</label>
-<label><input type="checkbox" data-id="rd2"> Юніт-економіка порахована, допустимий CPL відомий</label>
-<label><input type="checkbox" data-id="rd3"> CRM приймає ліди, час першої відповіді ≤ 30 хв</label>
+<label><input type="checkbox" data-id="rd2"> Юніт-економіка порахована: допустимий CPL для землі або CPA оплаченого замовлення для квитків відомий</label>
+<label><input type="checkbox" data-id="rd3"> Земля: CRM і погоджений строк відповіді працюють. Квитки: реєстр оплат, повернення та доставка квитків перевірені</label>
 <label><input type="checkbox" data-id="rd4"> Tracking plan реалізований, primary conversion налаштована</label>
 <label><input type="checkbox" data-id="rd5"> UTM-стандарт працює у всіх кампаніях</label>
 <label><input type="checkbox" data-id="rd6"> 3+ креативні гіпотези готові, брифи є</label>
@@ -499,7 +499,7 @@ function bind(){
   document.querySelectorAll('.quiz').forEach((q,i)=>{
     const ansBtns=q.querySelectorAll('.ans'),checkBtn=q.querySelector('.check');
     ansBtns.forEach(b=>b.onclick=()=>{ansBtns.forEach(x=>x.classList.remove('sel'));b.classList.add('sel');checkBtn.disabled=false});
-    checkBtn.onclick=()=>{let selected=q.querySelector('.sel'),feedback=q.querySelector('.feedback');if(!selected){feedback.textContent='Спочатку обери один варіант.';feedback.className='feedback show bad';return}const question=quizBank[i],correct=+selected.dataset.x===question.ok;feedback.textContent=correct?'Вірно. Запиши, як цей принцип змінить твою наступну дію в робочому зошиті.':'Не зовсім. Перечитай ключову ідею дня, відкрий питання новачка і знайди, яке припущення в обраному варіанті хибне.';feedback.className='feedback show '+(correct?'good':'bad');if(correct&&!done.has(i)){done.add(i);localStorage.setItem('pm-course-8w',JSON.stringify([...done]));meter()}};
+    checkBtn.onclick=()=>{let selected=q.querySelector('.sel'),feedback=q.querySelector('.feedback');if(!selected){feedback.textContent='Спочатку обери один варіант.';feedback.className='feedback show bad';return}const question=quizBank[i],correct=+selected.dataset.x===question.ok;feedback.textContent=correct?'Вірно. Запиши, як цей принцип змінить твою наступну дію в робочому зошиті.':'Не зовсім. Перечитай ключову ідею дня, відкрий питання новачка і знайди, яке припущення в обраному варіанті хибне.';feedback.className='feedback show '+(correct?'good':'bad');if(correct){try{JSON.parse(localStorage.getItem('pm-course-8w')||'[]').forEach(id=>done.add(id));done.add(i);localStorage.setItem('pm-course-8w',JSON.stringify([...done]));meter()}catch{feedback.textContent+=' Браузер не дозволив зберегти прогрес.'}}};
   });
 }
 function restoreChecks(){const done=JSON.parse(localStorage.getItem('pm-prep')||'[]');document.querySelectorAll('.checklist input').forEach(cb=>cb.checked=done.includes(cb.dataset.id));}
@@ -513,4 +513,4 @@ document.querySelector('#tabDict').onclick=()=>setView('dict');
 document.querySelector('#dictSearch').addEventListener('input',e=>renderDict(e.target.value));
 renderDict('');
 </script>
-<script src="course-expansion.js"></script><script src="visual-guides.js"></script><script src="course-ui.js"></script></body></html>
+<script src="course-expansion.js"></script><script src="visual-guides.js"></script><script src="ticket-context.js"></script><script src="course-ui.js"></script><script src="daily-navigation.js"></script></body></html>
